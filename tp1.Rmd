@@ -1,0 +1,37 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# 1. Décrire la situation statistique du jeu de données decathlon.csv
+
+41 individus : des sportifs\
+12 variables quantitatives\
+1 variable quali Competition à deux modalité : Jo et Decastar
+
+```{r echo=TRUE}
+df<-read.csv(file="decathlon.csv",head=TRUE, sep=";")
+```
+
+# 2. Réaliser une analyse statistique univariée pour l'ensemble des variables quantitatives.
+
+```{r}
+summary(df[,-c(13)])
+```
+
+```{r}
+Xquanti <- df[, sapply(df, is.numeric)]
+Xquanti
+```
+
+```{r}
+var(Xquanti)
+```
+
+```{r}
+apply(Xquanti, 2, var)
+```
+
+```{r}
+boxplot(Xquanti)
+```
