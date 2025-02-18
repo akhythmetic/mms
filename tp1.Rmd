@@ -35,3 +35,5 @@ apply(Xquanti, 2, var)
 ```{r}
 boxplot(Xquanti)
 ```
+
+ytfs
