@@ -15,25 +15,61 @@ df<-read.csv(file="decathlon.csv",head=TRUE, sep=";")
 
 # 2. Réaliser une analyse statistique univariée pour l'ensemble des variables quantitatives.
 
+## Resumé matriciel
+
 ```{r}
 summary(df[,-c(13)])
 ```
+
+'sapply(df, is.numeric)' retourne un vecteur logique où chaque élément est TRUE si la colonne est numérique, sinon FALSE
 
 ```{r}
 Xquanti <- df[, sapply(df, is.numeric)]
 Xquanti
 ```
 
+### Variance
+
+#### Matrice de variance-covariance
+
+Cov(U,V)=0 et [U, V sont des variables gaussiennes]{.underline} donc $U \perp\!\!\!\perp V$.
+
+$$ Cov(U,V)=0 \Rightarrow U \perp\!\!\!\perp V $$
+
+> *QAP : D'après la propriété ci-dessus je devrais obtenir une matrice de variance covariance diagonal avec des valeur proche de 0 à l'extérieur des diagonale : poruquoi n'est ce pas le cas ?*
+
 ```{r}
 var(Xquanti)
 ```
+
+#### Variance par colonne
+
+La fonction \`apply\` permet d'appliquer une fonction à chaque colonne (ou ligne) d'un dataframe ou d'une matrice. Syntaxe : apply(X, MARGIN, FUN)
+
+\- X : L'objet (dataframe ou matrice)
+
+\- MARGIN : 1 pour les lignes, 2 pour les colonnes
+
+\- FUN : La fonction à appliquer (ici, 'var' pour la variance)
 
 ```{r}
 apply(Xquanti, 2, var)
 ```
 
+# 2 bis. Variable qualitatives.
+
+### Tableau de contingence
+
+-   En nombre d'occurence
+
+-   en frequence
+
+```{r}
+table(Xquanti)
+```
+
+## Resumé graphique
+
 ```{r}
 boxplot(Xquanti)
 ```
-
-ytfs
