@@ -11,6 +11,7 @@ output: html_notebook
 
 ```{r echo=TRUE}
 df<-read.csv(file="decathlon.csv",head=TRUE, sep=";")
+head(df)
 ```
 
 # 2. Réaliser une analyse statistique univariée pour l'ensemble des variables quantitatives.
@@ -18,7 +19,7 @@ df<-read.csv(file="decathlon.csv",head=TRUE, sep=";")
 ## Resumé matriciel
 
 ```{r}
-summary(df[,-c(13)])
+summary(df)
 ```
 
 'sapply(df, is.numeric)' retourne un vecteur logique où chaque élément est TRUE si la colonne est numérique, sinon FALSE
@@ -39,7 +40,12 @@ $$ Cov(U,V)=0 \Rightarrow U \perp\!\!\!\perp V $$
 > *QAP : D'après la propriété ci-dessus je devrais obtenir une matrice de variance covariance diagonal avec des valeur proche de 0 à l'extérieur des diagonale : poruquoi n'est ce pas le cas ?*
 
 ```{r}
-var(Xquanti)
+mat_var_cov <- var(Xquanti)
+mat_var_cov
+```
+
+```{r}
+dim(mat_var_cov)
 ```
 
 #### Variance par colonne
@@ -58,18 +64,103 @@ apply(Xquanti, 2, var)
 
 # 2 bis. Variable qualitatives.
 
+```{r}
+Xquali <- df[, sapply(df, Negate(is.numeric))]
+Xquali
+```
+
 ### Tableau de contingence
+
+> *QAP : Il faut faire un tableau de contingence avec quel variable ?*
 
 -   En nombre d'occurence
 
--   en frequence
+-   en frequence ``` table(Xquali)/lenght(table(``Xquali``)) ```
 
 ```{r}
-table(Xquanti)
+table(Xquali)
 ```
 
 ## Resumé graphique
 
+### Boxplot *(boite à moustaches)*
+
 ```{r}
-boxplot(Xquanti)
+i <- c(1:12)
+for (j in i) {
+  boxplot(Xquanti[, j], main = colnames(Xquanti)[j])  # Affiche le titre avec le nom de la colonne
+}
+
 ```
+
+### Histogram
+
+densité gaussienne
+
+```{r}
+for (j in i) {
+  hist(Xquanti[, j], main = colnames(Xquanti)[j])  # Affiche le titre avec le nom de la colonne
+}
+
+```
+
+# 3. Proposer et réaliser plusieurs approches d'analyse statistique multivariée.
+
+## a) [Analyse bivariée]{.underline}
+
+correlation linéaire
+
+```{r}
+corr_Xquanti <- cor(Xquanti)
+corr_Xquanti
+```
+
+Installer et charger la librairie
+
+```{r}
+install.packages("corrplot")
+library(corrplot)
+```
+
+### Correlation heatmap *(jeu de dame)*
+
+```{r}
+corrplot(corr_Xquanti, method = "circle")
+```
+
+### Plot *(nuage de points)*
+
+```{r}
+for (j in i) {
+  plot(Xquanti[, j], main = colnames(Xquanti)[j])  # Affiche le titre avec le nom de la colonne
+}
+```
+
+# 4. Installer le package FactoMineR, et réaliser une ACP. 
+
+Installer et charger la librairie
+
+```{r}
+install.packages("FactoMineR")
+library(FactoMineR)
+```
+
+## PCA *(ACP)*
+
+```{r}
+PCA(Xquanti)
+```
+
+```{r}
+PCA(Xquanti[,1:10])
+```
+
+## [CONCLUSION :]{.underline}
+
+-   Il y a deux grands types d’épreuves : la course et le saut d’un côté, les lancers de l’autre.
+
+-   Les performances des athlètes sont bien résumées par ces deux catégories.
+
+-   Certains athlètes se démarquent beaucoup, d’autres sont plus proches les uns des autres.
+
+En résumé : les résultats montrent que les épreuves de vitesse et de saut sont liées, et que les épreuves de lancer forment un autre groupe.
