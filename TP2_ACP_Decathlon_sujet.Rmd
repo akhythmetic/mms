@@ -1,0 +1,325 @@
+---
+title: "TP 2 : Analyse en composantes principales (ACP) avec FactoMineR sur les données decathlon"
+author: "François Husson, S. Lèbre"
+output:
+  html_document: default
+  pdf_document:
+    fig_height: 6
+    keep_tex: yes
+  word_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Importation du jeu de données
+
+```{r }
+decathlon <- read.table("decathlon.csv", 
+      header=TRUE, sep=";",dec=".", row.names=1, check.names=FALSE, fileEncoding="latin1")
+```
+
+`header=TRUE` : précise que le nom des variables est présent
+
+`sep=";"` : précise que le séparateur de colonnes est le point-virgule
+(fréquent dans les fichiers csv, pour une tabulation il faudrait écrire
+`sep="\t"`)
+
+`dec="."` : le séparateur de décimale est le point (parfois dans Excel
+on trouve la virgule)
+
+`row.names=1` : précise que le nom des individus est dans la première
+colonne du tableau
+
+`check.names=FALSE` : impose que le nom des colonnes soit pris tel que
+dans le fichier (sinon les espaces sont remplacés par des points et des
+X sont mis avant les nombres)
+
+Il est important de s'assurer que l'importation a bien été effectuée, et
+notamment que les variables quantitatives sont bien considérées comme
+quantitatives et les variables qualitatives bien considérées comme
+qualitatives
+
+# Analyse statistique univariée
+
+```{r}
+summary(decathlon)
+Xquanti<-decathlon[,-c(13)]
+summary(Xquanti)
+#y a t-il des variables manquantes ?  
+sum(is.na(Xquanti)) #reponse
+apply(Xquanti, 2,var)
+
+for(i in 1:12){
+  hist(Xquanti[,i])
+}
+
+
+```
+
+# Analyse statistique bivariée
+
+```{r}
+plot(Xquanti)
+```
+
+```{r}
+matrice_cor <- cor(Xquanti)
+matrice_cor
+```
+
+```{r}
+install.packages("corrplot")
+library(corrplot)
+corrplot(matrice_cor)
+```
+
+### Correlation min et max
+
+```{r}
+max(matrice_cor)
+```
+
+```{r}
+min(matrice_cor)
+```
+
+### Paires de correlation sup à 0.5
+
+```{r}
+(sum(matrice_cor > 0.5)-12)/2
+```
+
+# ACP
+
+## Chargement de FactoMineR
+
+```{r}
+library(FactoMineR)
+```
+
+## L'ACP avec uniquement des éléments (lignes et variables) actifs
+
+Choisir uniquement les colonnes associées aux différentes épreuves.
+
+```{r}
+ epreuve <- Xquanti[, 1:10]
+```
+
+```{r}
+res <- PCA(epreuve)
+```
+
+**Question 1** Quelles sont les 2 graphiques donnés en sortie de l'appel
+à la fonction `PCA()` ?
+
+-   Nuages des inndividus
+
+-   Cercles des correlations (variables)
+
+**Question 2** Quelle est la part de variance expliquée par le 1er axe ?
+par le 2ème axe ?
+
+-   Le 1ere axe porte 32.72% de la variance
+
+-   Le 2eme axe porte 17.37% de la variance
+
+On peut obtenir un résumé des principaux résultats en utilisant la
+fonction `summary`.
+
+**Question 3** : Utiliser la fonction `summary` sur l'objet utilisé pour
+stocker les résulats de l'ACP.
+
+-\> val. propres
+
+-\> Individus
+
+-\> Variables
+
+```{r }
+summary(res)
+```
+
+[**Bonus**]{.underline} Representer graphiquement la valeur de la
+variance expliquée pour tous les axes
+
+```{r}
+res$eig
+```
+
+```{r}
+plot(res$eig[,2],type="h",lwd=5)
+```
+
+**Question 3** : Quelle est la part de variance expliquée par les 2
+premiers axes ?
+
+-   50%
+
+**Question 4** : Quelle est la part de variance expliquée par le 3ème
+axe ?
+
+-   14%
+-   =\> pour chercher 75% de la variance il faut prendre 4 axes
+
+### Préciser le nombre de dimensions
+
+Nous pouvons demander à avoir les résultats sur les 2 premières
+dimensions pour éviter d'avoir des tableaux trop grands grâce au
+paramètre `ncp` qui indique le nombre de composantes principales
+souhaitées (par défaut, la fonction retourne les résultats des 3
+premières dimensions).
+
+**Question 5** : Dans la fonction `summary` ci-dessous, restreindre les
+sorties résumées au 2 premières dimensions.
+
+```{r eval = FALSE}
+summary(res, ncp=2)
+```
+
+**Question 6** : Quelles sont les variables avec les coordonnées les
+plus extrêmes sur l'axe 1 ? sur l'axe 2 ?
+
+## L'ACP avec des variables supplémentaires (quantitatives ou qualitatives)
+
+Il est possible de représenter des variables sur le cercle des
+corrélations, alors qu'elles n'ont pas été utilisées pour construire les
+axes de l'ACP, grâce aux paramètres `quanti.sup=` et `quali.sup=` :
+
+**Question 6** : Ajouter les variables des colonnes 11 et 12 en
+variables supplémentaires. Afficher le résumé pour les 2 premières
+dimensions. Qu'observez-vous ?
+
+```{r}
+
+```
+
+**Question 7** : Ajouter la variable de la colonne 13 en variable
+supplémentaire. Afficher le résumé pour les 2 premières dimensions.
+Qu'observez-vous ?
+
+```{r}
+
+```
+
+### Pour imprimer les résultats dans un fichier :
+
+```{r eval=FALSE}
+summary(res, nbelements=Inf, file="essai.txt")
+```
+
+## Description des dimensions
+
+**Question 8** : Décrire la sortie de la commande ci-dessous.
+
+```{r}
+dimdesc(res)
+```
+
+**Question 9** : Que permet l'option `proba=0.2`?
+
+```{r}
+dimdesc(res, proba=0.2)
+```
+
+# Quelques options graphiques
+
+**Question 10** : Parmi les options graphiques présentées ci-après,
+lesquelles vous semblent les plus utiles ?
+
+## Graphe des individus avec des libellés de police plus petite et avec un titre
+
+```{r}
+plot(res, cex=0.8, invisible="quali", title="Graphe des individus")
+```
+
+Si on a beaucoup d'individus et que les libellés des individus ne sont
+pas explicites (des numéros par exemple), on peut supprimer les noms des
+libellés tout en laissant les points avec l'argument label="none".
+
+```{r eval=FALSE}
+plot(res, cex=0.8, invisible="quali", label="none", title="Graphe des individus")
+```
+
+## Coloriage des individus en fonction de leur modalité
+
+```{r}
+plot(res, cex=0.8, habillage=13)
+```
+
+On aurait pu écrire :
+
+```{r eval=FALSE}
+plot(res, cex=0.8, habillage=13)
+```
+
+\newpage
+
+# Ellipses de confiance autour des modalités
+
+```{r}
+plotellipses(res)
+```
+
+Si on a plusieurs variables qualitatives, on aura autant de graphes que
+de variables qualitatives. Avec sur chaque graphe, les ellipses de
+confiance des modalités de la variable qualitative en question.
+
+\newpage
+
+# Graphes sur les dimensions 3 et 4
+
+```{r}
+plot(res, choix="ind", cex=0.8, habillage=13, title="Graphe des individus", axes=3:4)
+plot(res, choix="var", title="Graphe des variables", axes=3:4)
+```
+
+\newpage
+
+# Graphe avec sélection des individus
+
+`select="cos2 0.7"` : sélectionne les individus qui ont, sur le plan
+tracé, une qualité de projection supérieure à 0.7
+
+`select="cos2 5"` : sélectionne les 5 individus qui ont la meilleure
+qualité de projection sur le plan tracé
+
+`select="contrib 5"` : sélectionne les 5 individus qui ont le plus
+contribué à la construction du plan tracé
+
+`select=c("nom1","nom2")` : sélectionne les individus par leur nom
+
+```{r}
+plot(res, cex=0.8, habillage=13, select="cos2 0.7") # cos2 > 0.7
+plot(res, cex=0.8, habillage=13, select="contrib 5") # (les 5 variables qui contribuent le +)
+plot(res, cex=0.8, habillage=13, select=c("Clay","Karpov")) # selection de certains individus
+```
+
+# Graphe du cercle des corrélations avec sélection des variables
+
+```{r}
+plot(res, choix="var", select="contrib 5")
+```
+
+\newpage
+
+# Graphe avec sélection des individus, des tailles de police différentes pour les titres, des ombres sous les points
+
+```{r}
+plot(res, cex=0.8, habillage=13, select="cos2 0.7", title="Performances au decathlon", 
+     cex.main=1.1, cex.axis=0.9, shadow=TRUE, auto="y")
+```
+
+# A VOIR
+
+## SUR YTB : FRANCOIS HUSSON ACP
+
+-   Slides du CM
+
+-   3videos
+
+-   Quiz 1
+
+-   Quiz 2
+
+-   Quiz 3
