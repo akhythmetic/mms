@@ -63,6 +63,19 @@ for(i in 1:12){
 plot(Xquanti)
 ```
 
+La corrélation de Pearson entre deux variables $X$ et $Y$ est donnée par
+:
+
+$$
+r = \frac{\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum (X_i - \bar{X})^2 \sum (Y_i - \bar{Y})^2}}
+$$
+
+où : - $r$ est le coefficient de corrélation, - $X_i$ et $Y_i$ sont les
+valeurs des variables, - $\bar{X}$ et $\bar{Y}$ sont les moyennes des
+variables.
+
+*(cf : ran_correlation)*
+
 ```{r}
 matrice_cor <- cor(Xquanti)
 matrice_cor

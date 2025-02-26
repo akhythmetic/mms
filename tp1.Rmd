@@ -118,11 +118,11 @@ corr_Xquanti
 Installer et charger la librairie
 
 ```{r}
-install.packages("corrplot")
+#install.packages("corrplot")
 library(corrplot)
 ```
 
-### Correlation heatmap *(jeu de dame)*
+### Correlation heatmap *(correlograme)*
 
 ```{r}
 corrplot(corr_Xquanti, method = "circle")
@@ -141,7 +141,7 @@ for (j in i) {
 Installer et charger la librairie
 
 ```{r}
-install.packages("FactoMineR")
+#install.packages("FactoMineR")
 library(FactoMineR)
 ```
 
