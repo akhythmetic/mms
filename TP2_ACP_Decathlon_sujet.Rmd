@@ -74,7 +74,8 @@ où : - $r$ est le coefficient de corrélation, - $X_i$ et $Y_i$ sont les
 valeurs des variables, - $\bar{X}$ et $\bar{Y}$ sont les moyennes des
 variables.
 
-*(cf : ran_correlation)*
+*(cf : [fiche de
+revision](https://github.com/akhythmetic/mms/blob/master/ran_correalation.md))*
 
 ```{r}
 matrice_cor <- cor(Xquanti)
@@ -187,11 +188,27 @@ premières dimensions).
 sorties résumées au 2 premières dimensions.
 
 ```{r eval = FALSE}
-summary(res, ncp=2)
+summary <- summary(res, ncp=2)
 ```
 
 **Question 6** : Quelles sont les variables avec les coordonnées les
 plus extrêmes sur l'axe 1 ? sur l'axe 2 ?
+
+```{r}
+var_acp <- res$var$coord # extaction tableau coordonnée variable
+dim1_max <- rownames(var_acp)[which.max(var_acp[,1])]
+dim1_min <- rownames(var_acp)[which.min(var_acp[,1])]
+dim2_max <- rownames(var_acp)[which.max(var_acp[,2])]
+dim2_min <- rownames(var_acp)[which.min(var_acp[,2])]
+
+extr_frame <- data.frame(
+  Axe = c("Dim 1", "Dim 2"),
+  Max = c(dim1_max, dim2_max),
+  Min = c(dim1_min, dim2_min)
+)
+
+extr_frame
+```
 
 ## L'ACP avec des variables supplémentaires (quantitatives ou qualitatives)
 
@@ -204,7 +221,12 @@ variables supplémentaires. Afficher le résumé pour les 2 premières
 dimensions. Qu'observez-vous ?
 
 ```{r}
-
+classement <- Xquanti[,11]
+points <- Xquanti[,12]
+res_pca_11_12 <- PCA(
+  epreuve, #data
+  
+)
 ```
 
 **Question 7** : Ajouter la variable de la colonne 13 en variable
