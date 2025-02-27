@@ -1,0 +1,47 @@
+---
+title: "td0_exo3"
+output: html_document
+date: "2025-02-27"
+---
+
+# TD 0
+
+## Exercice 3
+
+Soit $(X, Y)$ un couple de variables aléatoires gaussiennes d'espérence $\mu$ et de matrice variance-covariance $\Sigma$ définies ci-dessous :
+
+$$
+\mu = \begin{pmatrix}1\\-1\end{pmatrix} \quad et \quad \Sigma = \begin{pmatrix}3 && 2 \\ 2 && 4\end{pmatrix}
+$$
+
+### *Question 1*
+
+Générer un échantillon de $n = 100$ réalisations de $X$.
+
+```{r}
+mu <- matrix(c(1, -1), nrow=2, ncol=1)
+sigma <- cbind(c(3, 2), c(2, 4))
+
+n <- 100
+
+X_ech <- rnorm(n, mean = mu[1], sd = sigma[1,1]**0.5)
+X_ech
+```
+
+Superposer la densité empirique de l'échantillon.
+
+```{r}
+
+```
+
+Superposer la densité de probabilité $f _X$.
+
+```{r}
+
+```
+
+Répéter en faisant varier $n$.
+
+```{r}
+
+```
