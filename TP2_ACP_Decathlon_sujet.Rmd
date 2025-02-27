@@ -221,26 +221,41 @@ variables supplémentaires. Afficher le résumé pour les 2 premières
 dimensions. Qu'observez-vous ?
 
 ```{r}
-classement <- Xquanti[,11]
-points <- Xquanti[,12]
 res_pca_11_12 <- PCA(
-  epreuve, #data
-  
+  Xquanti, #data
+  quali.sup = 11,
+  quanti.sup = 12
 )
 ```
+
+Les points sont fortement correlé avec la dimention 1. et la positivité
+sur les deux axes est liée avec le classement
 
 **Question 7** : Ajouter la variable de la colonne 13 en variable
 supplémentaire. Afficher le résumé pour les 2 premières dimensions.
 Qu'observez-vous ?
 
 ```{r}
-
+res_pca_11_12_13 <- PCA(
+  decathlon[,-11], #data
+  quali.sup = 12,
+  quanti.sup = 11
+)
 ```
+
+```{r}
+summary(res_pca_11_12_13, ncp=2)
+```
+
+Dim 1 capture une opposition entre **les athlètes de Decastar** et
+**ceux des JO**. Les individus avec des valeurs négatives sur Dim 1 sont
+plus liés à Decastar, tandis que ceux avec des valeurs positives sont
+plus liés aux JO.
 
 ### Pour imprimer les résultats dans un fichier :
 
 ```{r eval=FALSE}
-summary(res, nbelements=Inf, file="essai.txt")
+summary(res_pca_11_12_13, nbelements=Inf, file="essai.txt")
 ```
 
 ## Description des dimensions
@@ -256,6 +271,10 @@ dimdesc(res)
 ```{r}
 dimdesc(res, proba=0.2)
 ```
+
+La commande `dimdesc(res)` est utilisée après une **Analyse en
+Composantes Principales (ACP)** pour analyser la contribution des
+variables continues à chaque dimension (ou axe factoriel).
 
 # Quelques options graphiques
 
@@ -279,13 +298,13 @@ plot(res, cex=0.8, invisible="quali", label="none", title="Graphe des individus"
 ## Coloriage des individus en fonction de leur modalité
 
 ```{r}
-plot(res, cex=0.8, habillage=13)
+plot(res, cex=0.8, habillage=1)
 ```
 
 On aurait pu écrire :
 
 ```{r eval=FALSE}
-plot(res, cex=0.8, habillage=13)
+plot(res, cex=0.8, habillage=1)
 ```
 
 \newpage
@@ -293,7 +312,7 @@ plot(res, cex=0.8, habillage=13)
 # Ellipses de confiance autour des modalités
 
 ```{r}
-plotellipses(res)
+plotellipses(res_pca_11_12)
 ```
 
 Si on a plusieurs variables qualitatives, on aura autant de graphes que
@@ -305,7 +324,7 @@ confiance des modalités de la variable qualitative en question.
 # Graphes sur les dimensions 3 et 4
 
 ```{r}
-plot(res, choix="ind", cex=0.8, habillage=13, title="Graphe des individus", axes=3:4)
+plot(res, choix="ind", cex=0.8, habillage=1, title="Graphe des individus", axes=3:4)
 plot(res, choix="var", title="Graphe des variables", axes=3:4)
 ```
 
@@ -325,9 +344,9 @@ contribué à la construction du plan tracé
 `select=c("nom1","nom2")` : sélectionne les individus par leur nom
 
 ```{r}
-plot(res, cex=0.8, habillage=13, select="cos2 0.7") # cos2 > 0.7
-plot(res, cex=0.8, habillage=13, select="contrib 5") # (les 5 variables qui contribuent le +)
-plot(res, cex=0.8, habillage=13, select=c("Clay","Karpov")) # selection de certains individus
+plot(res, cex=0.8, habillage=1, select="cos2 0.7") # cos2 > 0.7
+plot(res, cex=0.8, habillage=1, select="contrib 5") # (les 5 variables qui contribuent le +)
+plot(res, cex=0.8, habillage=1, select=c("Clay","Karpov")) # selection de certains individus
 ```
 
 # Graphe du cercle des corrélations avec sélection des variables
@@ -341,7 +360,7 @@ plot(res, choix="var", select="contrib 5")
 # Graphe avec sélection des individus, des tailles de police différentes pour les titres, des ombres sous les points
 
 ```{r}
-plot(res, cex=0.8, habillage=13, select="cos2 0.7", title="Performances au decathlon", 
+plot(res, cex=0.8, habillage=1, select="cos2 0.7", title="Performances au decathlon", 
      cex.main=1.1, cex.axis=0.9, shadow=TRUE, auto="y")
 ```
 
