@@ -28,20 +28,158 @@ X_ech <- rnorm(n, mean = mu[1], sd = sigma[1,1]**0.5)
 X_ech
 ```
 
-Superposer la densité empirique de l'échantillon.
+Représenter la densité empirique de l'échantillon.
 
 ```{r}
-
+hist(X_ech)
 ```
 
 Superposer la densité de probabilité $f _X$.
 
 ```{r}
+# Tracer l'histogramme avec option `probability = TRUE` pour avoir une échelle de densité
+hist(X_ech, probability = TRUE,
+     xlab = "x", ylab = "Densité", main = "Histogramme et densité de N(1,3)" )
 
+# Ajouter la courbe de densité par-dessus l'histogramme
+curve(dnorm(x, mean=mu[1], sd=sigma[1,1]), from=-10, to=12, col="blue", lwd=2, add=TRUE)
 ```
 
 Répéter en faisant varier $n$.
 
 ```{r}
+n <-100
+X_ech <- rnorm(n, mean = mu[1], sd = sigma[1,1]**0.5)
+```
+
+### *Question 2*
+
+Générer un échantillon de $n=100$ réalisation de $Y$.
+
+```{r}
+n <- 100
+Y_ech <- rnorm(n, mean = mu[2], sd = sigma[2,2]**0.5)
+Y_ech
+```
+
+### *Question 3*
+
+A l'issue de la question 1 et 2, avez-vous généré un échantillondu couple $(X ,Y)$?
+
+| Non
+
+```{r}
+cov(X_ech,Y_ech)
+```
+
+### *Question 4*
+
+Générer un échantillon de $n=100$ réalisations du couple $(X, Y)$.
+
+```{r}
+library(mvtnorm) #utilisé pour travailler avec les lois normales multivariées
+```
+
+```{r}
+n <- 100
+
+#Générer des échantillons d'une loi normale multivariée. library(mvtnorm)
+XY_ech <- rmvnorm(n, mu, sigma=sigma)
+head(XY_ech)
+```
+
+```{r}
+plot(XY_ech[,1], XY_ech[,2], 
+     xlab = "X", ylab = "Y", 
+     main = "Nuage de points (X, Y)", 
+     col = "blue", pch = 16)
+```
+
+```{r}
+library(MASS) # librairie data visu entre autre (mais surtout outil stat puissant)
+
+densite <- kde2d(XY_ech[,1], XY_ech[,2], n=50)  # Estimation de densité
+
+contour(densite, main="Contours de densité de (X, Y)") # courbes de niveau
 
 ```
+
+```{r}
+image( # Heatmap (carte de chaleur)
+  densite,
+  col=terrain.colors(50),
+  main="Heatmap de la densité jointe f_{X,Y}"
+)
+```
+
+```{r}
+persp( # Surface 3D 
+  densite, theta=30, phi=30, col="lightblue", shade=0.5, border=NA,
+      main="Densité jointe f_{X,Y} en 3D"
+  )
+
+```
+
+### *Question 5*
+
+Représenter graphiquement la densité de probabilité jointe $f_{X,Y}$.
+
+```{r}
+# Créer une grille de valeurs pour X et Y
+x_seq <- seq(-3, 3, length.out = 100)
+y_seq <- seq(-3, 3, length.out = 100)
+grid <- expand.grid(X = x_seq, Y = y_seq)  # Crée un tableau de toutes les combinaisons (X, Y)
+
+# Calculer la densité théorique pour chaque couple (X, Y)
+grid$Z <- dmvnorm(grid, mean = mu, sigma = sigma)
+
+# Transformer en matrice pour affichage
+Z_matrix <- matrix(grid$Z, nrow = 100, ncol = 100)
+
+# Tracer les contours de densité théorique
+contour(x_seq, y_seq, Z_matrix, main="Densité théorique conjointe f_{X,Y}",
+        xlab="X", ylab="Y")
+
+```
+
+```{r}
+persp(x_seq, y_seq, Z_matrix, theta=30, phi=30, col="lightblue", shade=0.5,
+      border=NA, main="Densité théorique f_{X,Y} en 3D")
+```
+
+Faire varier la valeur de la covariance $\sigma^2 _{12}$.
+
+```{r}
+sigma[1,2] <- -10
+sigma[2, 1] <- sigma[1,2]
+sigma
+```
+
+Qu'observez-vous ?
+
+| Cas $\sigma^2_{12} \neq \sigma^2_{21}$ :
+|         Les fonctions renvoient des erreurs indiquant qu'ils attendent une matrice sigma symétrique.
+
+| Cas $\sigma^2_{12} = \sigma^2_{21}$ :
+|                  Au dessus de 3 la matric n'est plus semidefinie positive et donc les commandes me renvoie des erreurs. 
+
+-   $\sigma^2_{12}>0$ (covariance positive)\
+    → **Les points sont alignés dans une direction ascendante** :
+
+    -   **Plus** $\sigma^2_{12}$ **est grand**, plus ( $X$ et $Y$ augmentent ensemble.
+
+    -   Nuage **étiré en diagonale vers le haut**.
+
+-   $\sigma^2_{12}<0$ (covariance négative)\
+    → **Les points sont alignés dans une direction descendante** :
+
+    -   Si $X$ augmente, $Y$ diminue.
+
+    -   Nuage **étiré en diagonale vers le bas**.
+
+-   $\sigma^2_{12}=0$(covariance nulle)\
+    → **Les points sont répartis aléatoirement, sans structure apparente** :
+
+    -   $X$ et $Y$ **ne sont pas corrélés**.
+
+    -   **Nuage circulaire** si $X$ et $Y$ ont la même variance.
