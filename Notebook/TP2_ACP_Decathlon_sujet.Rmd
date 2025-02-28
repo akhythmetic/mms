@@ -312,7 +312,7 @@ plot(res, cex=0.8, habillage=1)
 # Ellipses de confiance autour des modalités
 
 ```{r}
-plotellipses(res_pca_11_12)
+plotellipses(res)
 ```
 
 Si on a plusieurs variables qualitatives, on aura autant de graphes que

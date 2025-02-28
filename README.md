@@ -4,9 +4,13 @@ Ce dépôt contient les travaux pratiques réalisés dans le cadre du cours de *
 
 ## Menu knit
 
--   [TD 0](td0_exo3.pdf)
+-   [Remise à niveau sur la corrélation et l'ACP](https://akhythmetic.github.io/mms/knit/ran_correlation.html)
 
--   [TP 1](tp1.html)
+-   [TD 0](https://akhythmetic.github.io/mms/knit/td0_exo3.pdf)
+
+-   [TP 1](https://akhythmetic.github.io/mms/knit/tp1.html)
+
+-   [TP2](https://akhythmetic.github.io/mms/knit/TP2_ACP_Decathlon_sujet.html)
 
 ## Contenu du cours
 
