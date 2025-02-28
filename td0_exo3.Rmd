@@ -1,6 +1,8 @@
 ---
 title: "td0_exo3"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2025-02-27"
 ---
 
@@ -161,7 +163,7 @@ Qu'observez-vous ?
 |         Les fonctions renvoient des erreurs indiquant qu'ils attendent une matrice sigma symétrique.
 
 | Cas $\sigma^2_{12} = \sigma^2_{21}$ :
-|                  Au dessus de 3 la matric n'est plus semidefinie positive et donc les commandes me renvoie des erreurs. 
+|                  Au dessus de 3 la matric n'est plus semidefinie positive et donc les commandes me renvoie des erreurs.
 
 -   $\sigma^2_{12}>0$ (covariance positive)\
     → **Les points sont alignés dans une direction ascendante** :
