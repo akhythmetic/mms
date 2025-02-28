@@ -2,6 +2,10 @@
 
 Ce dépôt contient les travaux pratiques réalisés dans le cadre du cours de **Modélisation et Méthodes Statistiques** de troisieme année de licence MIASHS.
 
+## Contributeur
+
+C.E. Louati
+
 ## Menu knit
 
 -   [Remise à niveau sur la corrélation et l'ACP](https://akhythmetic.github.io/mms/knit/ran_correlation.html)
