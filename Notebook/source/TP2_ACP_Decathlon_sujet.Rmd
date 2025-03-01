@@ -15,7 +15,7 @@ editor_options:
 # Importation du jeu de données
 
 ```{r }
-decathlon <- read.table("decathlon.csv", 
+decathlon <- read.table("../../decathlon.csv", 
       header=TRUE, sep=";",dec=".", row.names=1, check.names=FALSE, fileEncoding="latin1")
 ```
 
@@ -75,7 +75,7 @@ valeurs des variables, - $\bar{X}$ et $\bar{Y}$ sont les moyennes des
 variables.
 
 *(cf : [fiche de
-revision](https://github.com/akhythmetic/mms/blob/master/ran_correalation.md))*
+revision](https://github.com/akhythmetic/mms/blob/master/fiche_revision/ran_correlation.md))*
 
 ```{r}
 matrice_cor <- cor(Xquanti)
