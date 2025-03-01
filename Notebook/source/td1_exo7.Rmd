@@ -1,0 +1,48 @@
+---
+title: "td1_exo7"
+output: html_notebook
+---
+
+# TD 1
+
+## Exercice 7
+
+Soit $X$ un vecteur gaussien de taille $d=10$, d'espérence $m$ et de variance-covariance $S$.
+
+### Question 1
+
+Créer un vecteur $m$ et une matrice $S$ de votre choix, sachant que $S$ doit contenir une grande partie de valeurs égales à 0.
+
+```{r}
+d <- 10
+m <- matrix(rep(0,d), nrow=d, ncol=1)
+S <- diag(10) #matrice Identité dim=10
+
+for (i in 1:(d-1)) {
+  for (j in (i+1):d) {
+    S[i, j] <- sample(1:9, 1)  # Remplacement par un nombre aléatoire entre 1 et 9
+    S[j, i] <- S[i, j]       # Assurer la symétrie
+  }
+}
+S
+```
+
+Pour que S soit une matrice de variance-covariance si elle verifie ces trois conditions :
+
+-   S doit etre symetrique
+
+-   S doit etre PSD
+
+-   $\forall i,S_{ii}\geq0$
+
+$$
+S \ est \ PSD \iff \forall i, \lambda_i\geq0 
+$$
+
+*PSD : Définie Semi-Positif*
+
+$\lambda$ : valeurs propres
+
+```{r}
+eigen(S)$values 
+```
