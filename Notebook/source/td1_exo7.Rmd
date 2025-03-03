@@ -9,31 +9,25 @@ output: html_notebook
 
 Soit $X$ un vecteur gaussien de taille $d=10$, d'espérence $m$ et de variance-covariance $S$.
 
-### Question 1
+### *Question 1*
 
 Créer un vecteur $m$ et une matrice $S$ de votre choix, sachant que $S$ doit contenir une grande partie de valeurs égales à 0.
 
 ```{r}
 d <- 10
 m <- matrix(rep(0,d), nrow=d, ncol=1)
-S <- diag(10) #matrice Identité dim=10
+S <- diag(d) #matrice Identité dim=d=10
 
-for (i in 1:(d-1)) {
-  for (j in (i+1):d) {
-    S[i, j] <- sample(1:9, 1)  # Remplacement par un nombre aléatoire entre 1 et 9
-    S[j, i] <- S[i, j]       # Assurer la symétrie
-  }
-}
 S
 ```
 
 Pour que S soit une matrice de variance-covariance si elle verifie ces trois conditions :
 
--   S doit etre symetrique
-
--   S doit etre PSD
+-   $S=S^T$
 
 -   $\forall i,S_{ii}\geq0$
+
+-   S doit etre PSD
 
 $$
 S \ est \ PSD \iff \forall i, \lambda_i\geq0 
@@ -41,8 +35,58 @@ $$
 
 *PSD : Définie Semi-Positif*
 
-$\lambda$ : valeurs propres
+$\lambda=(\lambda_1,...,\lambda_i,...,\lambda_n)$ : valeurs propres
 
 ```{r}
 eigen(S)$values 
+```
+
+Toutes les conditions sont respectées donc $S$ est une matrice de variance-covariance.
+
+### *Question 2*
+
+Construire la matrice de corrélation $C$ du vecteur $X$.
+
+```{r}
+corr<- cov2cor(S)
+corr
+```
+
+### *Question 3*
+
+A l'aide du `heatmap` , donner une représentation graphique de $C$.
+
+```{r}
+library(corrplot)
+```
+
+```{r}
+corrplot(corr)
+```
+
+### *Question 4*
+
+Générer un échantillon de taille `n=100` du vecteur $X$.
+
+```{r}
+library(mvtnorm)
+```
+
+```{r}
+n = 100
+X_ech<-rmvnorm(n=n, mean = m, sigma = S) 
+dim(X_ech)
+```
+
+### *Question 5*
+
+Calculer la corrélation empirique `C.estimation` dans cet échantillon, puis donner une représentation graphique.
+
+```{r}
+C.estimation <- cor(X_ech)
+C.estimation
+```
+
+```{r}
+corrplot(C.estimation)
 ```
