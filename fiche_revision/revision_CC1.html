@@ -362,44 +362,49 @@ display: none;
 <ul>
 <li><p><span class="math display">\[
 P(X=x) = F(x)
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 0 \leq F(x) \leq 1
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 E(X)=\int_{x\in \mathbb{R}} xf(x) dx
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 V(X)=E(X^2)-E(X)^2
-\]</span></p></li>
-</ul>
-</div>
-<div id="couple-de-v.a.-mathbbr" class="section level3">
-<h3>Couple de V.A. <span class="math inline">\(\mathbb{R}\)</span></h3>
-<ul>
-<li><span class="math display">\[
+\]</span></p>
+<hr />
+<h3 id="couple-de-v.a.-mathbbr">Couple de V.A. <span class="math inline">\(\mathbb{R}\)</span></h3></li>
+<li><p><span class="math display">\[
 F(x,y)=P(X\leq x,Y\leq y)
-\]</span></li>
+\]</span></p></li>
 </ul>
 <p><span class="math display">\[
 f(x,y)=\frac{\partial^2}{\partial x \partial y} F(x,y)
 \]</span></p>
+<hr />
 <ul>
 <li><p>Densités marginales :<span class="math display">\[
 \begin{cases}
 f_X(x)=\int_{y\in \mathbb{R}} f(x,y) dy \\
 f_Y(y)=\int_{x\in \mathbb{R}} f(x,y) dx
 \end{cases}
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 f(x,y)=f_X(x)f_Y(y) \Leftrightarrow X\perp\!\!\!\perp Y
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}} f(x,y)=1
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 E(X)= \int_{x\in\mathbb{R}} f(x) dx
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 Cov(X,Y)= E[(X-E(X))(Y-E(Y))] \\
 =E(XY)-E(X)E(Y)\\
@@ -407,18 +412,21 @@ Cov(X,Y)= E[(X-E(X))(Y-E(Y))] \\
 \text{avec } E(XY)=\int \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}}
 f(x,y) dx dy \\
 Cov(X,Y) \in ]-\infty,+\infty[
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 \rho_{X,Y}=\frac{Cov(X,Y)}{\sqrt{V(X)V(Y)}}
 \]</span> (cf : <a href="https://akhythmetic.github.io/mms/fiche_revision/ran_correlation.html">remise
 à niveau sur la correlation</a>)</p>
+<hr />
 <h4 id="propriété-algébrique">Propriété algébrique</h4></li>
 <li><p><span class="math display">\[
 E[aX+b]=aE(X)+b \\
 V[aX+b]=a^2V(X) \\
 E[aX+bY]=aE(X)+bE(Y) \\
 V[aX+bY]=a^2V(X)+b^2V(Y)+2Cov(X,Y)
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li></li>
 </ul>
 <p><span class="math display">\[
@@ -430,6 +438,7 @@ V[AX]=AV(X)A^T\\
 \\-\\
 Cov[aX+bY,Z]=aCov(X,Z)+bCov(Y,Z) \qquad \text{Bilinéarité !!}
 \]</span></p>
+<hr />
 </div>
 </div>
 <div id="chap.-1" class="section level2">
@@ -437,10 +446,12 @@ Cov[aX+bY,Z]=aCov(X,Z)+bCov(Y,Z) \qquad \text{Bilinéarité !!}
 <ul>
 <li><p>Matrice variance-covariance :<span class="math display">\[
 V(X)=E[(X-E(X))(X-E(X))^T]
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p><span class="math display">\[
 (AB)^T=B^TA^T
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p>Une matrice <span class="math inline">\(\Sigma\)</span> est une
 matrice de variance-covariance si et seulement si elle rempli les
 conditions ci dessous:</p>
@@ -453,22 +464,26 @@ définie posfitif). Ou les val.p. sont tous supérieur ou egales à
 0.</p></li>
 <li><p><span class="math inline">\(\forall i, \Sigma_{ii}
 \geq0\)</span></p></li>
-</ul></li>
+</ul>
+<hr /></li>
 <li><p><span class="math display">\[
 \forall i\neq j, X_i\perp\!\!\!\perp X_j \Rightarrow Cov(X_i,X_j)=0\\
 \Rightarrow f(x_1,...,x_d)=f_1(x_1)\times...\times f_d(x_d)\\
 =\Pi_{i=1}^d f_i(x_i)
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p>Conditionnel :</p>
 <p><span class="math display">\[
 X_A|X_B = x_b \sim \mathcal{N}(m,s),\\
 m=\mu_A+\Sigma_{AB}\Sigma_B^{-1}(x_B-\mu_b)\\
 s=\Sigma_{AA}-\Sigma_{AB}\Sigma_{BB}^{-1}\Sigma_{AB}^T
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 <li><p>Loi <span class="math inline">\(X^d\sim\mathcal{N}(\mu,\Sigma)\)</span>:</p>
 <p><span class="math display">\[
 \frac{1}{\sqrt{(2\pi)^d|\Sigma|}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}
-\]</span></p></li>
+\]</span></p>
+<hr /></li>
 </ul>
 </div>
 </div>
