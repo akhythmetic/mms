@@ -14,7 +14,7 @@ C.E. Louati
 
 -   [TD 0](https://akhythmetic.github.io/mms/Notebook/td0_exo3.pdf)
 
--   [TD 1](https://akhythmetic.github.io/mms/Notebook/td1_exo7.pdf)
+-   [TD 1](https://akhythmetic.github.io/mms/Notebook/td1_exo7.html)
 
 -   [TP 1](https://akhythmetic.github.io/mms/Notebook/tp1.html)
 
