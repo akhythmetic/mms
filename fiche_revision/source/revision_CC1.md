@@ -14,14 +14,15 @@
 
     ------------------------------------------------------------------------
 
--   $$
-    0 \leq F(x) \leq 1
-    $$
+$$
+0 \leq F(x) \leq 1
+$$
 
-    ------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 -   $$
-    E(X)=\int_{x\in \mathbb{R}} xf(x) dx
+    E(X)=\int_{x\in \mathbb{R}} xf(x) dx\\
+    E(X)=\Sigma_xxP(X=x)
     $$
 
     ------------------------------------------------------------------------
@@ -163,3 +164,29 @@ $$
     ------------------------------------------------------------------------
 
 ## TD 1
+
+-   `cinq_val_indep <- rnorm(5, mean=mu, sd=sigma**0.5)`
+
+    ------------------------------------------------------------------------
+
+-   `library(mvtnorm)`
+
+    `XY_ech <- rmvnorm(n, mu, sigma)`
+
+------------------------------------------------------------------------
+
+-   Pour que S soit une matrice de variance-covariance si elle verifie ces trois conditions :
+
+    -   $S=S^T$
+
+    -   $\forall i,S_{ii}\geq0$
+
+    -   S doit etre PSD
+
+    $$
+    S \ est \ PSD \iff \forall i, \lambda_i\geq0 
+    $$
+
+    *PSD : Définie Semi-Positif*
+
+    $\lambda=(\lambda_1,...,\lambda_i,...,\lambda_n)$ : valeurs propres
