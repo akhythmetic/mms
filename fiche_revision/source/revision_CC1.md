@@ -1,5 +1,8 @@
 ---
----
+title: "Révision CC1"
+output:
+  html_document:
+    df_print: paged
 ---
 
 # REVISION CC1
@@ -94,7 +97,7 @@ $$
     E[aX+b]=aE(X)+b \\
     V[aX+b]=a^2V(X) \\
     E[aX+bY]=aE(X)+bE(Y) \\
-    V[aX+bY]=a^2V(X)+b^2V(Y)+2Cov(X,Y)
+    V[aX+bY]=a^2V(X)+b^2V(Y)+2abCov(X,Y)
     $$
 
     ------------------------------------------------------------------------
