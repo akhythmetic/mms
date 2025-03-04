@@ -76,7 +76,7 @@ $$
     Cov(X,Y)= E[(X-E(X))(Y-E(Y))] \\
     =E(XY)-E(X)E(Y)\\
     \\
-    \text{avec } E(XY)= \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}} f(x,y) dx dy \\
+    \text{avec } E(XY)= \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}} xyf(x,y) dx dy \\
     Cov(X,Y) \in ]-\infty,+\infty[
     $$
 
