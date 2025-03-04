@@ -364,12 +364,15 @@ display: none;
 P(X=x) = F(x)
 \]</span></p>
 <hr /></li>
-<li><p><span class="math display">\[
+</ul>
+<p><span class="math display">\[
 0 \leq F(x) \leq 1
 \]</span></p>
-<hr /></li>
+<hr />
+<ul>
 <li><p><span class="math display">\[
-E(X)=\int_{x\in \mathbb{R}} xf(x) dx
+E(X)=\int_{x\in \mathbb{R}} xf(x) dx\\
+E(X)=\Sigma_xxP(X=x)
 \]</span></p>
 <hr /></li>
 <li><p><span class="math display">\[
@@ -409,8 +412,8 @@ E(X)= \int_{x\in\mathbb{R}} xf_X(x) dx
 Cov(X,Y)= E[(X-E(X))(Y-E(Y))] \\
 =E(XY)-E(X)E(Y)\\
 \\
-\text{avec } E(XY)=\int \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}}
-f(x,y) dx dy \\
+\text{avec } E(XY)= \int_{x\in \mathbb{R}}\int_{y\in \mathbb{R}} f(x,y)
+dx dy \\
 Cov(X,Y) \in ]-\infty,+\infty[
 \]</span></p>
 <hr /></li>
@@ -484,6 +487,32 @@ s=\Sigma_{AA}-\Sigma_{AB}\Sigma_{BB}^{-1}\Sigma_{AB}^T
 \frac{1}{\sqrt{(2\pi)^d|\Sigma|}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}
 \]</span></p>
 <hr /></li>
+</ul>
+</div>
+<div id="td-1" class="section level2">
+<h2>TD 1</h2>
+<ul>
+<li><p><code>cinq_val_indep &lt;- rnorm(5, mean=mu, sd=sigma**0.5)</code></p>
+<hr /></li>
+<li><p><code>library(mvtnorm)</code></p>
+<p><code>XY_ech &lt;- rmvnorm(n, mu, sigma)</code></p></li>
+</ul>
+<hr />
+<ul>
+<li><p>Pour que S soit une matrice de variance-covariance si elle
+verifie ces trois conditions :</p>
+<ul>
+<li><p><span class="math inline">\(S=S^T\)</span></p></li>
+<li><p><span class="math inline">\(\forall
+i,S_{ii}\geq0\)</span></p></li>
+<li><p>S doit etre PSD</p></li>
+</ul>
+<p><span class="math display">\[
+S \ est \ PSD \iff \forall i, \lambda_i\geq0
+\]</span></p>
+<p><em>PSD : Définie Semi-Positif</em></p>
+<p><span class="math inline">\(\lambda=(\lambda_1,...,\lambda_i,...,\lambda_n)\)</span>
+: valeurs propres</p></li>
 </ul>
 </div>
 </div>
