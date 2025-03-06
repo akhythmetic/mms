@@ -15,7 +15,7 @@ editor_options:
 # Importation du jeu de données
 
 ```{r }
-decathlon <- read.table("../../decathlon.csv", 
+decathlon <- read.table("../../data/decathlon.csv", 
       header=TRUE, sep=";",dec=".", row.names=1, check.names=FALSE, fileEncoding="latin1")
 ```
 

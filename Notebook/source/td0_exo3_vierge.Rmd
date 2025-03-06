@@ -1,0 +1,85 @@
+---
+title: "td0_exo3"
+output:
+  pdf_document: default
+  html_document: default
+date: "2025-02-27"
+---
+
+# TD 0
+
+## Exercice 3
+
+Soit $(X, Y)$ un couple de variables aléatoires gaussiennes d'espérence $\mu$ et de matrice variance-covariance $\Sigma$ définies ci-dessous :
+
+$$
+\mu = \begin{pmatrix}1\\-1\end{pmatrix} \quad et \quad \Sigma = \begin{pmatrix}3 && 2 \\ 2 && 4\end{pmatrix}
+$$
+
+### *Question 1*
+
+Générer un échantillon de $n = 100$ réalisations de $X$.
+
+```{r}
+
+```
+
+Représenter la densité empirique de l'échantillon.
+
+```{r}
+
+```
+
+Superposer la densité de probabilité $f _X$.
+
+```{r}
+
+```
+
+Répéter en faisant varier $n$.
+
+```{r}
+
+```
+
+### *Question 2*
+
+Générer un échantillon de $n=100$ réalisation de $Y$.
+
+```{r}
+
+```
+
+### *Question 3*
+
+A l'issue de la question 1 et 2, avez-vous généré un échantillondu couple $(X ,Y)$?
+
+| Non
+
+```{r}
+
+```
+
+### *Question 4*
+
+Générer un échantillon de $n=100$ réalisations du couple $(X, Y)$.
+
+```{r}
+
+```
+
+### *Question 5*
+
+Représenter graphiquement la densité de probabilité jointe $f_{X,Y}$.
+
+```{r}
+
+```
+
+Faire varier la valeur de la covariance $\sigma^2 _{12}$.
+
+```{r}
+
+```
+
+Qu'observez-vous ?

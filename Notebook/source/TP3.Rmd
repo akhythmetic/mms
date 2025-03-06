@@ -1,0 +1,28 @@
+---
+title: "TP 3"
+output: html_notebook
+---
+
+# TP 3
+
+```{r}
+df <- read.table(file="../../data/INFARCTUS.txt", header=TRUE, sep="", stringsAsFactors=FALSE)
+head(df)
+```
+
+## 1. ACP (selectionner les variables)
+
+(a) Selection des variables
+
+```{r}
+Xquanti <- df[, sapply(df, is.numeric)]
+Xquanti
+```
+
+## 2. Utiliser les qualitatives
+
+```{r}
+
+```
+
+## 3. Interprétation (10 lignes minimum). Quelles sont les variables liées au pronostic ?

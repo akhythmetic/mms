@@ -14,7 +14,7 @@ output:
 1 variable quali Competition à deux modalité : Jo et Decastar
 
 ```{r echo=TRUE}
-df<-read.csv(file="../../decathlon.csv",head=TRUE, sep=";")
+df<-read.csv(file="../../data/decathlon.csv",head=TRUE, sep=";")
 head(df)
 ```
 
