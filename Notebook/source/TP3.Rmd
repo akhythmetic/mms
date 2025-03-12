@@ -38,6 +38,7 @@ res <- PCA(Xquanti)
 
 ```{r}
 X <- df[,-1]
+X[, 1] <- as.character(X[, 1])
 X
 ```
 
@@ -50,6 +51,13 @@ X[,quali_indice]
 res_all <- PCA(
   X,
   quali.sup = quali_indice
+)
+```
+
+```{r}
+res_all_2 <- PCA(
+  X[,-c(2)],
+  quali.sup = 1
 )
 ```
 
@@ -71,6 +79,6 @@ Voici la liste des variables liées au pronostic :
 
 Le nuage de point semble assez dispersé sur l'axe vertical. Et etalé sur l'axe horizontal avec une perte de densité sur les extrémité.
 
-Les observations comprenant un décés ont tendance a etre positif dans la premieres dimension tandis que ce qui comprenent une survie sont négatif sur la première dimension. La deuxieme dimension parrait uniform donc sans conclusion.
+Les observations comprenant un décés et C=1 ont tendance a etre positif dans la premieres dimension tandis que ce qui comprenent une survie et C=2 sont négatif sur la première dimension. La deuxieme dimension parrait uniform donc sans conclusion.
 
-En conclusion, les décés semble etre lié à un score positif sur les variable qui contribuent positivement à la premiere dimension (e.i. PAPUL, PRDIA, RPUL). Les varibles contribuant le plus negativement à la premiere dimension sont plutot lié à la survie (i.e. INCAR, INSYS);
+En conclusion, les décés semble etre lié à un score positif sur les variable qui contribuent positivement à la premiere dimension (e.i. PAPUL, PRDIA, RPUL). Les varibles contribuant le plus negativement à la premiere dimension sont plutot lié à la survie (i.e. INCAR, INSYS). Les personnes avec l'attribue C_1 ont plus de risque de décéder tandis que les personne avec l'attribut C_2 ont plus de probabilité de survie.
