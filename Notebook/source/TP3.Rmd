@@ -1,6 +1,8 @@
 ---
 title: "TP 3"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
 # TP 3
@@ -19,10 +21,56 @@ Xquanti <- df[, sapply(df, is.numeric)]
 Xquanti
 ```
 
+```{r}
+Xquanti <- Xquanti[,-c(1,2)]
+Xquanti
+```
+
+```{r}
+library(FactoMineR)
+```
+
+```{r}
+res <- PCA(Xquanti)
+```
+
 ## 2. Utiliser les qualitatives
 
 ```{r}
+X <- df[,-1]
+X
+```
 
+```{r}
+quali_indice <- c(1,2)
+X[,quali_indice]
+```
+
+```{r}
+res_all <- PCA(
+  X,
+  quali.sup = quali_indice
+)
 ```
 
 ## 3. Interprétation (10 lignes minimum). Quelles sont les variables liées au pronostic ?
+
+Les variables qui joue un role important sur le dignostiques sont les varibale les mieux progetés sur le plan.
+
+Voici la liste des variables liées au pronostic :
+
+-   INCAR
+
+-   INSYS
+
+-   PAPUL
+
+-   PRDIA
+
+-   RPUL
+
+Le nuage de point semble assez dispersé sur l'axe vertical. Et etalé sur l'axe horizontal avec une perte de densité sur les extrémité.
+
+Les observations comprenant un décés ont tendance a etre positif dans la premieres dimension tandis que ce qui comprenent une survie sont négatif sur la première dimension. La deuxieme dimension parrait uniform donc sans conclusion.
+
+En conclusion, les décés semble etre lié à un score positif sur les variable qui contribuent positivement à la premiere dimension (e.i. PAPUL, PRDIA, RPUL). Les varibles contribuant le plus negativement à la premiere dimension sont plutot lié à la survie (i.e. INCAR, INSYS);

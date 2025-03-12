@@ -21,6 +21,8 @@ C.E. Louati
 
 -   [TP2](https://akhythmetic.github.io/mms/Notebook/TP2_ACP_Decathlon_sujet.html)
 
+-   [TP 3](https://akhythmetic.github.io/mms/Notebook/TP3.pdf)
+
 ## Contenu du cours
 
 Les TP suivent le plan du cours et couvrent les thématiques suivantes :
