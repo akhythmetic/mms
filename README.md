@@ -9,7 +9,10 @@ C.E. Louati
 ## Menu révision
 
 -   [Remise à niveau sur la corrélation et l'ACP](https://akhythmetic.github.io/mms/fiche_revision/ran_correlation.html)
+
 -   [Révision CC1](https://akhythmetic.github.io/mms/fiche_revision/revision_CC1.html)
+
+-   [Routine ACP](https://akhythmetic.github.io/mms/fiche_revision/routine_acp.html)
 
 ## Menu Notebook
 
